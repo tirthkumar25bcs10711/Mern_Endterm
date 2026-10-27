@@ -26,6 +26,7 @@ export const validateEnv = () => {
   process.env.PORT = process.env.PORT || '8084';
   process.env.JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || '30d';
   process.env.CLIENT_URL = process.env.CLIENT_URL || 'http://localhost:5173';
+  process.env.dbURL = process.env.dbURL || process.env.MONGODB_URI || process.env.DATABASE_URL || '';
 
   const missing = requiredEnvVars.filter((varName) => !process.env[varName] || process.env[varName].trim() === '');
 
@@ -57,7 +58,7 @@ export const validateEnv = () => {
 export const env = {
   NODE_ENV: process.env.NODE_ENV || 'development',
   PORT: parseInt(process.env.PORT, 10) || 8084,
-  dbURL: process.env.dbURL,
+  dbURL: process.env.dbURL || process.env.MONGODB_URI || process.env.DATABASE_URL,
   JWT_SECRET: process.env.JWT_SECRET || 'default-secret-key-change-in-production',
   JWT_EXPIRES_IN: process.env.JWT_EXPIRES_IN || '30d',
   CLIENT_URL: process.env.CLIENT_URL || 'http://localhost:5173',

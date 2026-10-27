@@ -25,7 +25,9 @@ const startServer = async () => {
       console.log(`Health check available at http://${HOST}:${PORT}/health`);
     });
   } catch (error) {
-    console.error('Fatal error starting server:', error.message);
+    console.error('\n❌ Fatal error starting server:', error.message);
+    if (error.stack) console.error(error.stack);
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     process.exit(1);
   }
 };
